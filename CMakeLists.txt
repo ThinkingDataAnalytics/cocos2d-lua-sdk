@@ -64,7 +64,7 @@ if(ANDROID)
     set(APP_NAME cocos2dlua)
     list(APPEND GAME_SOURCE 
          ${RUNTIME_SRC_ROOT}/proj.android/app/jni/hellolua/main.cpp
-         # [ThinkingAnalyticsSDK] 添加以下代码
+         # [ThinkingAnalyticsSDK] 
          ${RUNTIME_SRC_ROOT}/proj.android/app/src/org/cocos2dx/lua/ThinkingAnalyticsProxyJava.java
          ${RUNTIME_SRC_ROOT}/proj.android/app/libs/ThinkingSDK.aar
          )
@@ -85,7 +85,7 @@ elseif(APPLE)
         list(APPEND GAME_HEADER
              ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/AppController.h
              ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/RootViewController.h
-             # [ThinkingAnalyticsSDK] 添加以下代码
+             # [ThinkingAnalyticsSDK] 
              ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/ThinkingAnalyticsProxy.h
              )
         set(APP_UI_RES
@@ -98,7 +98,7 @@ elseif(APPLE)
              ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/AppController.mm
              ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/RootViewController.mm
              ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/Prefix.pch
-             # [ThinkingAnalyticsSDK] 添加以下代码
+             # [ThinkingAnalyticsSDK]
              ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/ThinkingAnalyticsProxy.mm
              ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/ThinkingSDK.framework
              ${APP_UI_RES}
@@ -136,7 +136,7 @@ else()
 endif()
 
 if(IOS)
-    # [ThinkingAnalyticsSDK] 添加以下代码
+    # [ThinkingAnalyticsSDK] 
     target_link_libraries(${APP_NAME} ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/ThinkingSDK.framework)
 endif()
 
@@ -157,11 +157,11 @@ if(APPLE)
             LINK_FLAGS "-pagezero_size 10000 -image_base 100000000"
         )
     elseif(IOS)
-        # [ThinkingAnalyticsSDK] 添加以下代码
+        # [ThinkingAnalyticsSDK] 
         set(CMAKE_EXE_LINKER_FLAGS -ObjC)
         set_xcode_property(${APP_NAME} INFOPLIST_FILE "${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/Info.plist")
         set_xcode_property(${APP_NAME} ASSETCATALOG_COMPILER_APPICON_NAME "AppIcon")
-        # [ThinkingAnalyticsSDK] 添加以下代码(可选，设置开发证书，Team ID)
+        # [ThinkingAnalyticsSDK] Add the following code (optional, set development certificate, team ID)
         set_xcode_property(${APP_NAME} DEVELOPMENT_TEAM "SV8R54PUAN")
         set_xcode_property(${APP_NAME} CODE_SIGN_IDENTITY "iPhone Developer")
         set_xcode_property(${APP_NAME} CMAKE_EXE_LINKER_FLAGS -ObjC)

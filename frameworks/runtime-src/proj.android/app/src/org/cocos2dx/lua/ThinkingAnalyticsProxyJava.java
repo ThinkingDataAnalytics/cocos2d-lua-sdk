@@ -30,14 +30,13 @@ public class ThinkingAnalyticsProxyJava {
 		return new JSONObject();
 	}
 
-	// 设置 SDK 自定义名称/版本号
 	public static void setCustomerLibInfo(String name, String version) {
 		ThinkingAnalyticsSDK.setCustomerLibInfo(name, version);
 	}
 
-	// debugOff = 0, -- 调试关闭
-	// debugOnly = 1, -- 调试开启，上报数据，但数据不入库
-	// debugOn = 2 -- 调试开启，上报数据，且数据入库
+	// debugOff = 0, 
+	// debugOnly = 1, 
+	// debugOn = 2 
 	public static void sharedInstance(String appId, String serverUrl, int debugModel) {
 		TDConfig config = TDConfig.getInstance(Cocos2dxActivity.getContext(), appId, serverUrl);
 		switch (debugModel) {
@@ -73,10 +72,8 @@ public class ThinkingAnalyticsProxyJava {
 		sInstance.logout();
 	}
 
-	//	level==0 不开启，level>0 开启
-	public static void setLogLevel(int level) {
-		boolean enable = (level>0);
-		ThinkingAnalyticsSDK.enableTrackLog(enable);
+	public static void setLogLevel(boolean enableLog) {
+		ThinkingAnalyticsSDK.enableTrackLog(enableLog);
 	}
 
 	public static void track(String eventName, String properties) {
@@ -147,7 +144,7 @@ public class ThinkingAnalyticsProxyJava {
 		sInstance.user_delete();
 	}
 
-	// 设置自动采集事件类型 autoTrack:{appInstall=true,appStart=true,appEnd=true,appCrash=true} properties
+	//  autoTrack:{appInstall=true,appStart=true,appEnd=true,appCrash=true} properties
 	public static void enableAutoTrack(String autoTrack, String properties) {
 		System.out.print("[ThinkingAnalyticsSDK] enableAutoTrack");
 		if (sInstance == null) {
@@ -199,4 +196,13 @@ public class ThinkingAnalyticsProxyJava {
 	public static String getDeviceId() {
 		return sInstance.getDeviceId();
 	}
+
+	public static void calibrateTime(float timestamp) {
+		sInstance.calibrateTime((long) timestamp);
+	}
+
+	public static void calibrateTimeWithNtp(String ntpServer) {
+		sInstance.calibrateTimeWithNtp(ntpServer);
+	}
+
 }

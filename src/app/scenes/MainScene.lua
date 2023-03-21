@@ -31,6 +31,8 @@ function ThinkingAnalyticsDemo()
 	local SERVER_URL = "https://receiver-ta-dev.thinkingdata.cn"
 
     ThinkingAnalyticsSDK.setLogLevel(ThinkingAnalyticsSDK.logLevel.logLevelDebug)
+    ThinkingAnalyticsSDK.calibrateTime(1585633785954)
+    -- ThinkingAnalyticsSDK.calibrateTimeWithNtp("time.apple.com")
     ThinkingAnalyticsSDK.init(APP_ID, SERVER_URL, ThinkingAnalyticsSDK.debugModel.debugOff)
     local autoTack = {
         appInstall = true, 
@@ -144,19 +146,19 @@ function ThinkingAnalyticsDemo()
     local presetProperties = ThinkingAnalyticsSDK.getPresetProperties()
     print("presetProperties = ", json.encode(presetProperties.toEventPresetProperties()))
 
-    local bundleId = presetProperties.bundleId -- 包名
-    local mOS =  presetProperties.os -- os类型，如Android
-    local systemLanguage = presetProperties.systemLanguage -- 手机系统语言类型
-    local screenWidth = presetProperties.screenWidth -- 屏幕宽度
-    local screenHeight = presetProperties.screenHeight -- 屏幕高度
-    local deviceModel = presetProperties.deviceModel -- 设备型号
-    local deviceId = presetProperties.deviceId -- 设备唯一标识
-    local carrier = presetProperties.carrier -- 手机SIM卡运营商信息，双卡双待时，取主卡的运营商信息
-    local manufacturer = presetProperties.manufacturer -- 手机制造商 如HuaWei
-    local networkType = presetProperties.networkType -- 网络类型
-    local osVersion = presetProperties.osVersion -- 系统版本号
-    local appVersion = presetProperties.appVersion -- app版本号
-    local zoneOffset = presetProperties.zoneOffset -- 时区偏移值
+    local bundleId = presetProperties.bundleId 
+    local mOS =  presetProperties.os
+    local systemLanguage = presetProperties.systemLanguage 
+    local screenWidth = presetProperties.screenWidth
+    local screenHeight = presetProperties.screenHeight 
+    local deviceModel = presetProperties.deviceModel 
+    local deviceId = presetProperties.deviceId
+    local carrier = presetProperties.carrier 
+    local manufacturer = presetProperties.manufacturer 
+    local networkType = presetProperties.networkType 
+    local osVersion = presetProperties.osVersion 
+    local appVersion = presetProperties.appVersion 
+    local zoneOffset = presetProperties.zoneOffset
 	print(bundleId, mOS, systemLanguage, screenWidth, screenHeight,
 	deviceModel, deviceId, carrier, manufacturer, networkType,
 	osVersion, appVersion, zoneOffset)
