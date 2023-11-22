@@ -1,91 +1,91 @@
 //
-//  ThinkingAnalyticsProxy.m
+//  TDAnalyticsProxy.m
 //  demo iOS
 //
 //  Created by huangdiao on 2022/3/10.
 //
 
-#import "ThinkingAnalyticsProxy.h"
+#import "TDAnalyticsProxy.h"
 #include "platform/ios/CCLuaObjcBridge.h"
 #import <ThinkingSDK/ThinkingAnalyticsSDK.h>
 
-@interface ThinkingAnalyticsProxy ()
+@interface TDAnalyticsProxy ()
 
 @end
 
-@implementation ThinkingAnalyticsProxy
+@implementation TDAnalyticsProxy
 
-/* ========== begin of singleton ===========  */
-__strong static ThinkingAnalyticsProxy *_singleton = nil;
+// /* ========== begin of singleton ===========  */
+// __strong static TDAnalyticsProxy *_singleton = nil;
 
-+ (id)allocWithZone:(NSZone *)zone
-{
-    return [self sharedInstance];
-}
+// + (id)allocWithZone:(NSZone *)zone
+// {
+//     return [self sharedInstance];
+// }
 
-+ (ThinkingAnalyticsProxy *)sharedInstance
-{
-    static dispatch_once_t pred = 0;
-    dispatch_once(&pred, ^{
-        _singleton = [[super allocWithZone:NULL] init];
-    });
-    return _singleton;
-}
+// + (TDAnalyticsProxy *)sharedInstance
+// {
+//     static dispatch_once_t pred = 0;
+//     dispatch_once(&pred, ^{
+//         _singleton = [[super allocWithZone:NULL] init];
+//     });
+//     return _singleton;
+// }
 
-- (id)copyWithZone:(NSZone *)zone
-{
-    return self;
-}
+// - (id)copyWithZone:(NSZone *)zone
+// {
+//     return self;
+// }
 
-/* ========== end of singleton ===========  */
+// /* ========== end of singleton ===========  */
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _name = @"ThinkingAnalyticsProxy";
-        _luaHander = -1;
-    }
-    return self;
-}
+// - (instancetype)init
+// {
+//     self = [super init];
+//     if (self) {
+//         _name = @"TDAnalyticsProxy";
+//         _luaHander = -1;
+//     }
+//     return self;
+// }
 
-- (void)delay
-{
-    cocos2d::LuaObjcBridge::pushLuaFunctionById(self.luaHander);
-    cocos2d::LuaValueDict item;
-    item["str"] = cocos2d::LuaValue::stringValue("hello");
-    item["int"] = cocos2d::LuaValue::intValue(1000);
-    item["bool"] = cocos2d::LuaValue::booleanValue(TRUE);
-    cocos2d::LuaObjcBridge::getStack()->pushLuaValueDict(item);
-    cocos2d::LuaObjcBridge::getStack()->executeFunction(1);
+// - (void)delay
+// {
+//     cocos2d::LuaObjcBridge::pushLuaFunctionById(self.luaHander);
+//     cocos2d::LuaValueDict item;
+//     item["str"] = cocos2d::LuaValue::stringValue("hello");
+//     item["int"] = cocos2d::LuaValue::intValue(1000);
+//     item["bool"] = cocos2d::LuaValue::booleanValue(TRUE);
+//     cocos2d::LuaObjcBridge::getStack()->pushLuaValueDict(item);
+//     cocos2d::LuaObjcBridge::getStack()->executeFunction(1);
 
-    cocos2d::LuaObjcBridge::releaseLuaFunctionById(self.luaHander);
-}
+//     cocos2d::LuaObjcBridge::releaseLuaFunctionById(self.luaHander);
+// }
 
-+ (NSDictionary *)LuaOCTest:(NSDictionary *)dict
-{
-    if ([dict objectForKey:@"cb"]) {
-        [ThinkingAnalyticsProxy sharedInstance].luaHander = [[dict objectForKey:@"cb"] intValue];
-    }
+// + (NSDictionary *)LuaOCTest:(NSDictionary *)dict
+// {
+//     if ([dict objectForKey:@"cb"]) {
+//         [TDAnalyticsProxy sharedInstance].luaHander = [[dict objectForKey:@"cb"] intValue];
+//     }
 
-    [[ThinkingAnalyticsProxy sharedInstance] performSelector:@selector(delay) withObject:nil afterDelay:2];
+//     [[TDAnalyticsProxy sharedInstance] performSelector:@selector(delay) withObject:nil afterDelay:2];
 
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            [ThinkingAnalyticsProxy sharedInstance].name, @"name",
-            [NSNumber numberWithInt:[ThinkingAnalyticsProxy sharedInstance].luaHander], @"luaHander",
-            nil];
-}
+//     return [NSDictionary dictionaryWithObjectsAndKeys:
+//             [TDAnalyticsProxy sharedInstance].name, @"name",
+//             [NSNumber numberWithInt:[TDAnalyticsProxy sharedInstance].luaHander], @"luaHander",
+//             nil];
+// }
 
-static NSString * APP_ID = @"22e445595b0f42bd8c5fe35bc44b88d6";
-static NSString * SERVER_URL = @"https://receiver-ta-dev.thinkingdata.cn";
+// static NSString * APP_ID = @"22e445595b0f42bd8c5fe35bc44b88d6";
+// static NSString * SERVER_URL = @"https://receiver-ta-dev.thinkingdata.cn";
 
-+ (void)startSDK:(NSDictionary *)data {
+// + (void)startSDK:(NSDictionary *)data {
     
-    [ThinkingAnalyticsSDK setLogLevel:TDLoggingLevelDebug];
-    ThinkingAnalyticsSDK *instance = [ThinkingAnalyticsSDK startWithAppId:APP_ID withUrl:SERVER_URL];
+//     [ThinkingAnalyticsSDK setLogLevel:TDLoggingLevelDebug];
+//     ThinkingAnalyticsSDK *instance = [ThinkingAnalyticsSDK startWithAppId:APP_ID withUrl:SERVER_URL];
     
-    [instance track:@"test_event"];
-}
+//     [instance track:@"test_event"];
+// }
 
 + (void)setCustomerLibInfo:(NSDictionary *)params {
     NSString *name = params[@"name"];
@@ -270,6 +270,11 @@ ThinkingAnalyticsSDK * sharedInstance(NSDictionary *params) {
     [sharedInstance(params) user_append:params[@"properties"]];
 }
 
++ (void)userUniqAppend:(NSDictionary *)params {
+    // params = calibrateLuaTable(params);
+    // [sharedInstance(params) user_uniqAppend:params[@"properties"]];
+}
+
 + (void)userUnset:(NSDictionary *)params {
     [sharedInstance(params) user_unset:params[@"property"]];
 }
@@ -324,6 +329,10 @@ ThinkingAnalyticsSDK * sharedInstance(NSDictionary *params) {
     }
 }
 
++ (void)setTrackStatus:(NSDictionary *)params {
+    // [sharedInstance(params) setTrackStatus];
+}
+
 + (NSDictionary *)getDeviceId:(NSDictionary *)params {
     NSString *deviceId = [sharedInstance(params) getDeviceId];
     return [NSDictionary dictionaryWithObjectsAndKeys:deviceId, @"deviceId", nil];
@@ -337,6 +346,10 @@ ThinkingAnalyticsSDK * sharedInstance(NSDictionary *params) {
 + (void)calibrateTimeWithNtp:(NSDictionary *)params {
     NSString *ntpServer = params[@"ntpServer"];
     [ThinkingAnalyticsSDK calibrateTimeWithNtp:ntpServer];
+}
+
++ (void)flush:(NSDictionary *)params {
+    [sharedInstance(params) flush];
 }
 
 BOOL stringIsEmpty(NSString *str) {

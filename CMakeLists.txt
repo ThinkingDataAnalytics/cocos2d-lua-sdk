@@ -65,7 +65,7 @@ if(ANDROID)
     list(APPEND GAME_SOURCE 
          ${RUNTIME_SRC_ROOT}/proj.android/app/jni/hellolua/main.cpp
          # [ThinkingAnalyticsSDK] 
-         ${RUNTIME_SRC_ROOT}/proj.android/app/src/org/cocos2dx/lua/ThinkingAnalyticsProxyJava.java
+         ${RUNTIME_SRC_ROOT}/proj.android/app/src/org/cocos2dx/lua/TDAnalyticsProxy.java
          ${RUNTIME_SRC_ROOT}/proj.android/app/libs/ThinkingSDK.aar
          )
 elseif(LINUX)
@@ -86,7 +86,7 @@ elseif(APPLE)
              ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/AppController.h
              ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/RootViewController.h
              # [ThinkingAnalyticsSDK] 
-             ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/ThinkingAnalyticsProxy.h
+             ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/TDAnalyticsProxy.h
              )
         set(APP_UI_RES
             ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/LaunchScreen.storyboard
@@ -99,7 +99,7 @@ elseif(APPLE)
              ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/RootViewController.mm
              ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/Prefix.pch
              # [ThinkingAnalyticsSDK]
-             ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/ThinkingAnalyticsProxy.mm
+             ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/TDAnalyticsProxy.mm
              ${RUNTIME_SRC_ROOT}/proj.ios_mac/ios/ThinkingSDK.framework
              ${APP_UI_RES}
              )
