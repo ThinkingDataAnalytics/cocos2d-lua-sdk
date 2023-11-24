@@ -6,7 +6,7 @@
 local TDAnalytics = {}
 
 local TE_SDK_NAME = "Cocos2d-Lua"
-local TE_SDK_VERSION = "2.0.0"
+local TE_SDK_VERSION = "2.0.1"
 --[[
     Common Log
 ]]

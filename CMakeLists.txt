@@ -66,7 +66,8 @@ if(ANDROID)
          ${RUNTIME_SRC_ROOT}/proj.android/app/jni/hellolua/main.cpp
          # [ThinkingAnalyticsSDK] 
          ${RUNTIME_SRC_ROOT}/proj.android/app/src/org/cocos2dx/lua/TDAnalyticsProxy.java
-         ${RUNTIME_SRC_ROOT}/proj.android/app/libs/ThinkingSDK.aar
+         ${RUNTIME_SRC_ROOT}/proj.android/app/libs/TDAnalytics.aar
+         ${RUNTIME_SRC_ROOT}/proj.android/app/libs/TDCore.aar
          )
 elseif(LINUX)
     list(APPEND GAME_SOURCE ${RUNTIME_SRC_ROOT}/proj.linux/main.cpp)
