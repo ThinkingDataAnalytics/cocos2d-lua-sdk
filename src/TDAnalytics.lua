@@ -6,7 +6,7 @@
 local TDAnalytics = {}
 
 local TE_SDK_NAME = "Cocos2d-Lua"
-local TE_SDK_VERSION = "2.0.1"
+local TE_SDK_VERSION = "2.0.2"
 --[[
     Common Log
 ]]
@@ -803,7 +803,7 @@ TDAnalytics.calibrateTimeWithNtp = function(ntpServer)
             ntpServer = ntpServer
         })
     elseif TDAnalytics.PlatformAndroid() then
-        luaj.callStaticMethod(javaProxyClass, "calibrateTimeWithNtp", {}, "(Ljava/lang/String;)V")
+        luaj.callStaticMethod(javaProxyClass, "calibrateTimeWithNtp", {ntpServer}, "(Ljava/lang/String;)V")
     else
         TDAnalytics.TELOG("current platform is not support, ", device.platform)
     end
